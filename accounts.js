@@ -1,3 +1,3 @@
 module.exports = [
-    '387021919'
+    { id: '902926941413453824', user: 'cz_binance' }
 ]
