@@ -77,6 +77,7 @@ const getFollowingsv2 = async () => {
 
             for (let item of userObjects) {
                 const exists = await checkUserID(item.user_id, parent.id);
+                if(exists == true){ break; }
                 if (exists == false) {
                     // Add user to database
                     let userData = {
