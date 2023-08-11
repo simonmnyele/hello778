@@ -8,8 +8,9 @@ const TelegramBot = require('node-telegram-bot-api');
 const bot = new TelegramBot('6437077973:AAG3NR2uf7eo3mKV-BvQPXQaHKn2vgCvPCc', { polling: false });
 var CronJob = require('cron').CronJob;
 
+
 var job = new CronJob('*/3 * * * *', function () { //run every hour
-    //getFollowingsv2();
+    getFollowingsv2();
 });
 job.start();
 
@@ -47,7 +48,7 @@ async function saveUser(dataObject) {
 
 const getFollowingsv2 = async () => {
     console.log('Session Started!');
-    for (let userID of usernames) {
+    for (let parent of usernames) {
 
         const options = {
             method: 'POST',
@@ -58,7 +59,7 @@ const getFollowingsv2 = async () => {
                 'X-RapidAPI-Host': 'twitter154.p.rapidapi.com'
             },
             data: {
-                user_id: userID,
+                user_id: parent.id,
                 limit: '5'
             }
         };
@@ -66,7 +67,6 @@ const getFollowingsv2 = async () => {
         try {
             const response = await axios.request(options);
             const userObjects = response.data.results;
-            console.log(response);
 
             if (userObjects.length == 0) {
                 console.log(`No followings for user ${user}`);
@@ -76,18 +76,18 @@ const getFollowingsv2 = async () => {
             let counter = 0;
 
             for (let item of userObjects) {
-                const exists = await checkUserID(item.user_id, userID);
+                const exists = await checkUserID(item.user_id, parent.id);
                 if (exists == false) {
                     // Add user to database
                     let userData = {
-                        parentUser: userID,
+                        parentUser: parent.id,
                         followingsID: item.user_id,
                         followingsUsername: item.username,
                         createdAt: item.creation_date
                     }
                     await saveUser(userData);
                     debugger;
-                    sendNotification(parent_user_id, item.username);
+                    sendNotification(parent.user, item.username);
                     counter++;
 
                     if (counter === 5) {
@@ -103,8 +103,13 @@ const getFollowingsv2 = async () => {
 }
 
 function sendNotification(parentUsername, username) {
-    const message = `${parentUsername} just followed ${username}`;
-    const chatId = '960174467'; // Replace with the chat ID of your desired Telegram chat
+    const message = `${parentUsername} just followed ${username}
+${parentUsername}: www.twitter.com/${parentUsername}
+${username}: www.twitter.com/${username}`;
+
+    console.log(message);
+    debugger;
+    const chatId = '809676911'; // Replace with the chat ID of your desired Telegram chat
 
     bot.sendMessage(chatId, message)
         .then(() => {
@@ -114,5 +119,3 @@ function sendNotification(parentUsername, username) {
             console.error('Error sending notification:', error);
         });
 }
-
-getFollowingsv2();
