@@ -77,7 +77,6 @@ const getFollowingsv2 = async () => {
 
             for (let item of userObjects) {
                 const exists = await checkUserID(item.user_id, parent.id);
-                if(exists == true){ break; }
                 if (exists == false) {
                     // Add user to database
                     let userData = {
@@ -89,11 +88,10 @@ const getFollowingsv2 = async () => {
                     await saveUser(userData);
                     debugger;
                     sendNotification(parent.user, item.username);
-                    counter++;
-
-                    if (counter === 5) {
-                        break;
-                    }
+                }
+                counter++;
+                if (counter === 5) {
+                    break;
                 }
             }
         } catch (error) {
