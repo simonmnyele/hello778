@@ -9,7 +9,7 @@ const bot = new TelegramBot('6437077973:AAG3NR2uf7eo3mKV-BvQPXQaHKn2vgCvPCc', { 
 var CronJob = require('cron').CronJob;
 
 
-var job = new CronJob('*/3 * * * *', function () { //run every hour
+var job = new CronJob('*/5 * * * *', function () { //run every hour
     getFollowingsv2();
 });
 job.start();
