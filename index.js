@@ -132,7 +132,7 @@ ${username}: www.twitter.com/${username}`;
 
     console.log(message);
     debugger;
-    const chatId = '1001950054286'; // Replace with the chat ID of your desired Telegram chat
+    const chatId = '809676911'; // Replace with the chat ID of your desired Telegram chat
 
     bot.sendMessage(chatId, message)
         .then(() => {
