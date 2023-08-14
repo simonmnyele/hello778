@@ -14,6 +14,27 @@ var job = new CronJob('*/5 * * * *', function () { //run every hour
 });
 job.start();
 
+async function saveBackLog(parentID) {
+    var connection = mysql.createConnection(conn);
+    const query = util.promisify(connection.query).bind(connection);
+
+    try {
+        // Execute the query
+        const sql = `SELECT COUNT(*) AS count FROM userFollowings WHERE parentUser = ${parentID}`;
+        let results = await query(sql);
+        // Check if the count is greater than 0
+        const count = results[0].count;
+        const exists = count > 0;
+
+        return exists;
+    } catch (error) {
+        throw error;
+    } finally {
+        // Close the database connection
+        connection.end();
+    }
+}
+
 async function checkUserID(userID, parentID) {
     var connection = mysql.createConnection(conn);
     const query = util.promisify(connection.query).bind(connection);
@@ -74,9 +95,11 @@ const getFollowingsv2 = async () => {
             }
 
             let counter = 0;
+            const parentExists = await saveBackLog(parent.id); //If false then save the current data as a reference
 
             for (let item of userObjects) {
                 const exists = await checkUserID(item.user_id, parent.id);
+
                 if (exists == false) {
                     // Add user to database
                     let userData = {
@@ -85,9 +108,10 @@ const getFollowingsv2 = async () => {
                         followingsUsername: item.username,
                         createdAt: item.creation_date
                     }
+
                     await saveUser(userData);
                     debugger;
-                    sendNotification(parent.user, item.username);
+                    if (parentExists == true) { sendNotification(parent.user, item.username); }
                 }
                 counter++;
                 if (counter === 5) {
@@ -108,7 +132,7 @@ ${username}: www.twitter.com/${username}`;
 
     console.log(message);
     debugger;
-    const chatId = '809676911'; // Replace with the chat ID of your desired Telegram chat
+    const chatId = '1001950054286'; // Replace with the chat ID of your desired Telegram chat
 
     bot.sendMessage(chatId, message)
         .then(() => {
