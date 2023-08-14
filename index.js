@@ -90,7 +90,7 @@ const getFollowingsv2 = async () => {
             const userObjects = response.data.results;
 
             if (userObjects.length == 0) {
-                console.log(`No followings for user ${user}`);
+                console.log(`No followings for user ${user_id.user}`);
                 continue;
             }
 
