@@ -172,7 +172,7 @@ const getFollowingsv2 = async () => {
                         createdAt: item.creation_date
                     }
 
-                    await saveUser(userData);
+                    await saveUser(query, userData);
                     sendNotification(parent.user, item.username);
                 }
             }
