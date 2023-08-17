@@ -16,5 +16,6 @@ module.exports = [
     { id: '1397323152053530626', user: 'IHunt100xGems' },
     { id: '36638685', user: 'PetaByteCapital' },
     { id: '918956561216737280', user: 'TraderNJ1' },
-    { id: '1243470638477697024', user: 'ZssBecker' }
+    { id: '1243470638477697024', user: 'ZssBecker' },
+    { id: '1430251685847474180', user: 'flopstofreedom' }
 ]
