@@ -1,8 +1,20 @@
 module.exports = [
-    { id: '1430251685847474180', user: 'flopstofreedom' },
-    { id: '902926941413453824', user: 'cz_binance' },
-    { id: '1484112393361891328', user: 'GCRClassic' },
-    { id: '1067927682023915521', user: 'sweatystartup' },
-    { id: '104281062', user: 'girdley' },
-    { id: '1658190072666021941', user: 'FrederikFeldt_' }
+    { id: '1269095159192485896', user: '0xUnihax0r' },
+    { id: '1222917012780998656', user: 'chirocrypto' },
+    { id: '11382956502684639233', user: 'palletjacker69' },
+    { id: '1246678416956391424', user: 'mapletarzan' },
+    { id: '3396684460', user: 'iSmeshCrypto' },
+    { id: '1502675875166359552', user: 'tonymoontanaeth' },
+    { id: '1375544275161686017', user: 'DefiRabbitHole' },
+    { id: '984188226826010624', user: 'Uniswap' },
+    { id: '1403293509411512325', user: 'BagCalls' },
+    { id: '1152137593544462336', user: 'AlexAndryunin' },
+    { id: '1452480311405727751', user: 'dexscreener' },
+    { id: '157011708', user: 'HolderMorkCT' },
+    { id: '1440473006577356804', user: 'cheatcoiner' },
+    { id: '1433494466988593153', user: 'spvce_' },
+    { id: '1397323152053530626', user: 'IHunt100xGems' },
+    { id: '36638685', user: 'PetaByteCapital' },
+    { id: '918956561216737280', user: 'TraderNJ1' },
+    { id: '1243470638477697024', user: 'ZssBecker' }
 ]
